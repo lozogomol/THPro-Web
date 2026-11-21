@@ -1,0 +1,18 @@
+# Dependencias (se instalan con `npm install`)
+node_modules/
+
+# Compilaciones de Next.js (se generan con `npm run dev` / `npm run build`)
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Variables de entorno (por si se agregan en el futuro)
+.env
+.env*.local
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

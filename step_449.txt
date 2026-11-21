@@ -1,0 +1,78 @@
+Created At: 2026-10-22T15:32:00-04:00
+Completed At: 2026-10-22T15:32:00-04:00
+Showing lines 1-75 of 263
+1: "use client"
+2: import { useState } from "react";
+3: import { IMAGES } from "../constant/theme";
+4: import Link from "next/link";
+5: import { wecaredata2 } from "../constant/alldata";
+6: 
+7: function Wecare2() {
+8:     const [hover, setHover] = useState<number>(2);
+9:     return (
+10:         <>
+11:             <style>{`
+12:                 /* Fondo morado permanente con el estilo original de tarjeta style-6 y su recorte característico */
+13:                 .wecare2-themed .icon-bx-wraper.style-6 {
+14:                     padding: 32px 110px 28px 32px !important;
+15:                     border-radius: 20px !important;
+16:                     scroll-margin-top: 105px !important;
+17:                     height: 100% !important;
+18:                     display: flex !important;
+19:                     flex-direction: column !important;
+20:                     justify-content: space-between !important;
+21:                     box-sizing: border-box !important;
+22:                     outline: none !important;
+23:                     border: none !important;
+24:                     transition: all 0.4s ease !important;
+25:                 }
+26:                 .wecare2-themed .icon-bx-wraper.style-6:after {
+27:                     background: #30266D !important;
+28:                 }
+29:                 .wecare2-themed .icon-bx-wraper.style-6 .bg {
+30:                     opacity: 1 !important;
+31:                     background-color: #30266D !important;
+32:                 }
+33:                 .wecare2-themed .icon-bx-wraper.style-6 .dz-title,
+34:                 .wecare2-themed .icon-bx-wraper.style-6 p,
+35:                 .wecare2-themed .icon-bx-wraper.style-6 a {
+36:                     color: #ffffff !important;
+37:                 }
+38:                 .wecare2-themed .icon-bx-wraper.style-6 .dz-title {
+39:                     font-size: 22px !important;
+40:                     margin-bottom: 18px !important;
+41:                     padding-bottom: 16px !important;
+42:                     font-weight: 600 !important;
+43:                 }
+44:                 .wecare2-themed .icon-bx-wraper.style-6 .dz-title:after {
+45:                     background: linear-gradient(to right, rgba(255,255,255,0.4) 0, rgba(255,255,255,0) 100%) !important;
+46:                     height: 1px !important;
+47:                 }
+48:                 .wecare2-themed .icon-bx-wraper.style-6::before {
+49:                     display: none !important;
+50:                     content: none !important;
+51:                 }
+52: 
+53:                 /* Medio cuadrado a la derecha donde iba el icono (sin icono adentro) */
+54:                 .wecare2-themed .icon-bx-wraper.style-6 .icon-bx {
+55:                     background: #30266D !important;
+56:                     width: 90px !important;
+57:                     height: 90px !important;
+58:                     position: absolute !important;
+59:                     right: 0 !important;
+60:                     bottom: 0 !important;
+61:                     border-radius: 20px !important;
+62:                     border: none !important;
+63:                     box-shadow: none !important;
+64:                     display: block !important;
+65:                 }
+66: 
+67:                 /* Al pasar por encima o activo: MANTENER MORADO */
+68:                 .wecare2-themed .icon-bx-wraper.style-6.active:after,
+69:                 .wecare2-themed .icon-bx-wraper.style-6:hover:after {
+70:                     background: #30266D !important;
+71:                 }
+72:                 .wecare2-themed .icon-bx-wraper.style-6.active .bg,
+73:                 .wecare2-themed .icon-bx-wraper.style-6:hover .bg {
+74:                     background-color: #30266D !important;
+75:                     opacity: 1 !important;

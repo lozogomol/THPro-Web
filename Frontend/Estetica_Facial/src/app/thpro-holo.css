@@ -1,0 +1,13 @@
+/* Fondo dinámico (misma animación que Fisioterapia). Ver holoCss en constant/theme.ts */
+:root { --thpro-holo-anim: thproHoloShift 22s ease-in-out infinite alternate; }
+@keyframes thproHoloShift {
+    0%   { background-position: 120% 0, 0% 0%, 100% 100%, 0 0; }
+    100% { background-position: -20% 0, 100% 100%, 0% 0%, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    :root { --thpro-holo-anim: none; }
+}
+
+/* Botón para subir: rosa claro de la imagen de servicios (hover: el otro rosita) */
+.scroltop { background: linear-gradient(115deg, rgba(255, 255, 255, 0) 40%, rgba(255, 220, 238, 0.18) 48%, rgba(255, 255, 255, 0.24) 50%, rgba(255, 220, 238, 0.18) 52%, rgba(255, 255, 255, 0) 60%), radial-gradient(circle at center, rgba(249, 22, 129, 0.95) 0, rgba(249, 22, 129, 0) 60%), radial-gradient(circle at center, rgba(141, 18, 90, 0.95) 0, rgba(141, 18, 90, 0) 60%), linear-gradient(135deg, #8D125A 0%, #F91681 100%) !important; background-size: 250% 100%, 250% 250%, 250% 250%, 100% 100% !important; background-repeat: no-repeat !important; animation: var(--thpro-holo-anim) !important; }
+.scroltop:hover { background: linear-gradient(115deg, rgba(255, 255, 255, 0) 40%, rgba(255, 220, 238, 0.18) 48%, rgba(255, 255, 255, 0.24) 50%, rgba(255, 220, 238, 0.18) 52%, rgba(255, 255, 255, 0) 60%), radial-gradient(circle at center, rgba(249, 22, 129, 0.95) 0, rgba(249, 22, 129, 0) 60%), radial-gradient(circle at center, rgba(141, 18, 90, 0.95) 0, rgba(141, 18, 90, 0) 60%), linear-gradient(135deg, #8D125A 0%, #F91681 100%) !important; background-size: 250% 100%, 250% 250%, 250% 250%, 100% 100% !important; background-repeat: no-repeat !important; animation: var(--thpro-holo-anim) !important; filter: brightness(1.12) !important; }

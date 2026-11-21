@@ -1,0 +1,9 @@
+/* Fondo dinámico (misma animación que Fisioterapia). Ver holoCss en constant/theme.ts */
+:root { --thpro-holo-anim: thproHoloShift 22s ease-in-out infinite alternate; }
+@keyframes thproHoloShift {
+    0%   { background-position: 120% 0, 0% 0%, 100% 100%, 0 0; }
+    100% { background-position: -20% 0, 100% 100%, 0% 0%, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    :root { --thpro-holo-anim: none; }
+}

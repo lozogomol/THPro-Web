@@ -1,0 +1,11 @@
+{
+  "name": "frontend-unified",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix Fisioterapia\" \"npm run dev --prefix Estetica_Corporal\" \"npm run dev --prefix Estetica_Facial\"",
+    "install-all": "npm install --prefix Fisioterapia && npm install --prefix Estetica_Corporal && npm install --prefix Estetica_Facial"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,107 @@
+Created At: 2026-10-22T15:32:06-04:00
+Completed At: 2026-10-22T15:32:07-04:00
+Showing lines 160-263 of 263
+160:                     }
+161:                 }
+162: 
+163:                 .wecare2-themed .icon-bx-wraper.style-6 p {
+164:                     margin-bottom: 0 !important;
+165:                     line-height: 1.65 !important;
+166:                     font-size: 14.5px !important;
+167:                     color: rgba(255, 255, 255, 0.9) !important;
+168:                 }
+169:                 .wecare2-themed .icon-content {
+170:                     display: flex !important;
+171:                     flex-direction: column !important;
+172:                     height: 100% !important;
+173:                     justify-content: space-between !important;
+174:                     flex-grow: 1 !important;
+175:                 }
+176: 
+177:                 /* Lista de características del servicio */
+178:                 .wecare2-features-wrapper {
+179:                     margin-top: 16px !important;
+180:                     margin-bottom: 6px !important;
+181:                 }
+182:                 .wecare2-features-label {
+183:                     color: #F9669D !important;
+184:                     font-size: 12px !important;
+185:                     font-weight: 700 !important;
+186:                     text-transform: uppercase !important;
+187:                     letter-spacing: 0.8px !important;
+188:                     margin-bottom: 8px !important;
+189:                 }
+190:                 .wecare2-features-list {
+191:                     list-style: none !important;
+192:                     padding: 0 !important;
+193:                     margin: 0 !important;
+194:                     display: flex !important;
+195:                     flex-direction: column !important;
+196:                     gap: 8px !important;
+197:                 }
+198:                 .wecare2-features-list li {
+199:                     display: flex !important;
+200:                     align-items: flex-start !important;
+201:                     gap: 10px !important;
+202:                     color: #ffffff !important;
+203:                     font-size: 14px !important;
+204:                     line-height: 1.5 !important;
+205:                 }
+206:                 .wecare2-features-list li i {
+207:                     color: #F9669D !important;
+208:                     font-size: 14px !important;
+209:                     margin-top: 3px !important;
+210:                     flex-shrink: 0 !important;
+211:                     font-weight: bold !important;
+212:                 }
+213:             `}</style>
+214:             <div className="row counter-reset wecare2-themed">
+215:                 {wecaredata2.map((data, i) => (
+216:                     <div 
+217:                         className="wecare2-card-col wow fadeInUp" 
+218:                         data-wow-delay={data.delay} 
+219:                         data-wow-duration="0.8s" 
+220:                         key={i}
+221:                     >
+222:                         <div 
+223:                             id={data.slug}
+224:                             className={`icon-bx-wraper style-6 counter-increment ${hover === data.id ? 'active' : ''}`} 
+225:                             onMouseEnter={() => setHover(data.id)}
+226:                         >
+227:                             <div className="bg" style={{ backgroundImage: `url(${IMAGES.bg7.src})` }}></div>
+228:                             <div className="icon-bx">
+229:                                 {/* Medio cuadrado original en la esquina derecha sin icono */}
+230:                             </div>
+231:                             <div className="icon-content">
+232:                                 <div>
+233:                                     <h3 className="dz-title">{data.title}</h3>
+234:                                     <p>{data.description}</p>
+235:                                     
+236:                                     {data.features && (
+237:                                         <div className="wecare2-features-wrapper">
+238:                                             <div className="wecare2-features-label">Características</div>
+239:                                             <ul className="wecare2-features-list">
+240:                                                 {data.features.map((feature, fIdx) => (
+241:                                                     <li key={fIdx}>
+242:                                                         <i className="feather icon-check" />
+243:                                                         <span>{feature}</span>
+244:                                                     </li>
+245:                                                 ))}
+246:                                             </ul>
+247:                                         </div>
+248:                                     )}
+249:                                 </div>
+250:                                 <div className="m-t25">
+251:                                     <Link href="/appointment" className="icon-link-hover-end d-inline-flex align-items-center">
+252:                                         Más Información <i className="feather icon-arrow-right-circle m-l10" />
+253:                                     </Link>
+254:                                 </div>
+255:                             </div>
+256:                         </div>
+257:                     </div>
+258:                 ))}
+259:             </div>
+260:         </>
+261:     )
+262: }
+263: export default Wecare2;

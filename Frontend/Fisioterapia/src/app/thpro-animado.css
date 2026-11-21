@@ -1,0 +1,94 @@
+/* =========================================================
+   THPro - Fondo animado moderno (reemplaza a Fisioterapia.png)
+   Paleta:
+     Fondo general  #FFFFFF   Sidebar   #1B0B3D
+     Tarjetas       #FFFFFF   Botones   #4B1D96
+     Hover          #7B3FE4   Destacado #F3ECFF
+     Bordes         #E9D8FF   Texto     #211638
+   ========================================================= */
+
+/* Propiedades animables: ángulo del degradado y posición de las luces */
+@property --thpro-ang { syntax: '<angle>'; inherits: false; initial-value: 135deg; }
+@property --thpro-l1x { syntax: '<percentage>'; inherits: false; initial-value: 18%; }
+@property --thpro-l1y { syntax: '<percentage>'; inherits: false; initial-value: 22%; }
+@property --thpro-l2x { syntax: '<percentage>'; inherits: false; initial-value: 82%; }
+@property --thpro-l2y { syntax: '<percentage>'; inherits: false; initial-value: 78%; }
+@property --thpro-l3x { syntax: '<percentage>'; inherits: false; initial-value: 60%; }
+@property --thpro-l3y { syntax: '<percentage>'; inherits: false; initial-value: 15%; }
+
+@keyframes thproFlow {
+    0% {
+        --thpro-ang: 135deg;
+        --thpro-l1x: 18%; --thpro-l1y: 22%;
+        --thpro-l2x: 82%; --thpro-l2y: 78%;
+        --thpro-l3x: 60%; --thpro-l3y: 15%;
+    }
+    33% {
+        --thpro-ang: 165deg;
+        --thpro-l1x: 40%; --thpro-l1y: 65%;
+        --thpro-l2x: 65%; --thpro-l2y: 30%;
+        --thpro-l3x: 20%; --thpro-l3y: 40%;
+    }
+    66% {
+        --thpro-ang: 200deg;
+        --thpro-l1x: 75%; --thpro-l1y: 35%;
+        --thpro-l2x: 25%; --thpro-l2y: 70%;
+        --thpro-l3x: 85%; --thpro-l3y: 60%;
+    }
+    100% {
+        --thpro-ang: 135deg;
+        --thpro-l1x: 18%; --thpro-l1y: 22%;
+        --thpro-l2x: 82%; --thpro-l2y: 78%;
+        --thpro-l3x: 60%; --thpro-l3y: 15%;
+    }
+}
+
+/* Burbujas: suben flotando con un leve vaivén */
+@keyframes thproBubbleRise {
+    0%   { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0; }
+    10%  { opacity: 1; }
+    50%  { transform: translate3d(var(--thpro-drift, 24px), -55vh, 0) scale(1); }
+    90%  { opacity: 1; }
+    100% { transform: translate3d(0, -110vh, 0) scale(1.06); opacity: 0; }
+}
+@keyframes thproBubbleWobble {
+    0%, 100% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+    50%      { border-radius: 47% 53% 52% 48% / 53% 47% 53% 47%; }
+}
+
+/* Capa de burbujas (doble clase para ganar especificidad a reglas tipo "> *") */
+.thpro-bubbles.thpro-bubbles {
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+.thpro-bubble {
+    position: absolute;
+    bottom: -160px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.55) 0, rgba(255, 255, 255, 0.12) 18%, transparent 34%),
+        radial-gradient(circle at 70% 78%, rgba(233, 216, 255, 0.28) 0, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(123, 63, 228, 0.10) 0, rgba(243, 236, 255, 0.06) 62%, rgba(255, 255, 255, 0.22) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow:
+        inset 0 0 18px rgba(255, 255, 255, 0.18),
+        inset -6px -10px 22px rgba(123, 63, 228, 0.18),
+        0 10px 40px rgba(27, 11, 61, 0.25);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    animation:
+        thproBubbleRise var(--thpro-dur, 18s) linear infinite,
+        thproBubbleWobble 6s ease-in-out infinite;
+    animation-delay: var(--thpro-delay, 0s), 0s;
+    will-change: transform, opacity;
+}
+
+/* Panel de vidrio: ahora definido en thpro-holografico.css (vidrio oscuro) */
+
+@media (prefers-reduced-motion: reduce) {
+    .thpro-bubble { animation: none !important; opacity: 0.6; bottom: auto; }
+    [style*="thproFlow"], .thpro-anim-static { animation: none !important; }
+}

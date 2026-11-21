@@ -1,0 +1,188 @@
+/* =========================================================
+   THPro - Fondo dinámico de 2 morados oscuros
+     Morado 1: #140632   ·   Morado 2: #4A1A93
+   Remolino sedoso + manchas + luz volumétrica realista con polvo flotando.
+   ========================================================= */
+
+/* ---- Capa fija detrás de todo (no se repinta al hacer scroll) ---- */
+.thpro-holo {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(135deg, #140632 0%, #4A1A93 100%);
+}
+/* Remolino sedoso: los 2 morados girando muy despacio, bien difuminados */
+.thpro-holo::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160vmax;
+    height: 160vmax;
+    margin: -80vmax 0 0 -80vmax;
+    background: conic-gradient(from 0deg, #140632, #4A1A93, #140632, #4A1A93, #140632);
+    filter: blur(70px);
+    opacity: 0.6;
+    animation: thproSwirl 60s linear infinite;
+    will-change: transform;
+}
+/* Brillo suave que "respira" en el centro */
+.thpro-holo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, rgba(74, 26, 147, 0.55) 0, rgba(74, 26, 147, 0) 55%);
+    animation: thproBreath 9s ease-in-out infinite alternate;
+}
+@keyframes thproSwirl {
+    to { transform: rotate(360deg); }
+}
+@keyframes thproBreath {
+    0%   { opacity: 0.35; transform: scale(0.95); }
+    100% { opacity: 0.9;  transform: scale(1.08); }
+}
+
+.thpro-holo__beams,
+.thpro-holo__sparks {
+    position: absolute;
+    width: 90vmax;
+    height: 90vmax;
+    border-radius: 50%;
+    filter: blur(80px);
+    will-change: transform;
+}
+/* Mancha clara (morado 2) */
+.thpro-holo__beams {
+    top: -30vmax;
+    left: -20vmax;
+    background: radial-gradient(circle, #4A1A93 0%, rgba(74, 26, 147, 0) 70%);
+    animation: thproBlobA 26s ease-in-out infinite alternate;
+}
+/* Mancha oscura (morado 1) */
+.thpro-holo__sparks {
+    bottom: -35vmax;
+    right: -25vmax;
+    background: radial-gradient(circle, #140632 0%, rgba(20, 6, 50, 0) 70%);
+    animation: thproBlobB 30s ease-in-out infinite alternate;
+}
+@keyframes thproBlobA {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(45vw, 35vh, 0) scale(1.15); }
+}
+@keyframes thproBlobB {
+    0%   { transform: translate3d(0, 0, 0) scale(1.1); }
+    100% { transform: translate3d(-40vw, -30vh, 0) scale(0.95); }
+}
+
+/* ---------- Luz volumétrica realista ---------- */
+/* La fuente de luz está fuera de la pantalla, arriba a la izquierda */
+.thpro-light {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(ellipse 140% 130% at 0% 0%, #000 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.35) 70%, transparent 95%);
+    mask-image: radial-gradient(ellipse 140% 130% at 0% 0%, #000 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.35) 70%, transparent 95%);
+}
+/* Resplandor de la fuente: suave, amplio, sin borde */
+.thpro-light__bloom {
+    position: absolute;
+    top: -45vmax;
+    left: -40vmax;
+    width: 100vmax;
+    height: 100vmax;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 248, 255, 0.55) 0%,
+        rgba(232, 214, 255, 0.28) 18%,
+        rgba(196, 170, 255, 0.12) 38%,
+        rgba(196, 170, 255, 0) 62%);
+    animation: thproBloom 14s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+}
+/* Cada haz: ancho, muy difuminado y se desvanece con la distancia */
+.thpro-light__ray {
+    position: absolute;
+    top: -12vmax;
+    left: -6vmax;
+    height: 190vmax;
+    transform-origin: 50% 0;
+    background: linear-gradient(to bottom,
+        rgba(255, 250, 255, 1) 0%,
+        rgba(236, 224, 255, 0.55) 25%,
+        rgba(214, 196, 255, 0.22) 55%,
+        rgba(214, 196, 255, 0) 85%);
+    opacity: var(--op);
+    transform: rotate(var(--ang));
+    animation-name: thproRaySway;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    will-change: transform, opacity;
+}
+/* Polvo flotando en la luz */
+.thpro-light__dust {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 250, 255, 0.9);
+    box-shadow: 0 0 6px 1px rgba(236, 224, 255, 0.6);
+    filter: blur(0.6px);
+    opacity: 0;
+    animation-name: thproDust;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    will-change: transform, opacity;
+}
+@keyframes thproBloom {
+    0%   { transform: scale(0.96); opacity: 0.85; }
+    100% { transform: scale(1.06) translate3d(1.5vw, 1vh, 0); opacity: 1; }
+}
+@keyframes thproRaySway {
+    0%   { transform: rotate(calc(var(--ang) - 2deg)); opacity: calc(var(--op) * 0.55); }
+    45%  { opacity: var(--op); }
+    100% { transform: rotate(calc(var(--ang) + 2.5deg)); opacity: calc(var(--op) * 0.8); }
+}
+@keyframes thproDust {
+    0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+    20%  { opacity: 0.7; }
+    50%  { transform: translate3d(2.5vw, 4vh, 0); opacity: 0.45; }
+    80%  { opacity: 0.65; }
+    100% { transform: translate3d(5vw, 8vh, 0); opacity: 0; }
+}
+
+/* Versión compacta para barra superior, pie de página, menú y tarjetas (ver holoCss en theme.ts) */
+:root { --thpro-holo-anim: thproHoloShift 22s ease-in-out infinite alternate; }
+@keyframes thproHoloShift {
+    0%   { background-position: 120% 0, 0% 0%, 100% 100%, 0 0; }
+    100% { background-position: -20% 0, 100% 100%, 0% 0%, 0 0; }
+}
+
+/* Panel del inicio: vidrio discreto en los mismos morados */
+.thpro-glass {
+    background: rgba(20, 6, 50, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 20px 60px rgba(20, 6, 50, 0.35) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+/* Celular: menos desenfoque = mejor rendimiento */
+@media (max-width: 767px) {
+    .thpro-holo__beams,
+    .thpro-holo__sparks { filter: blur(50px); }
+    .thpro-holo::before { filter: blur(45px); }
+    .thpro-light__dust { display: none; }
+}
+
+/* Sin animación si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+    .thpro-holo__beams,
+    .thpro-holo__sparks,
+    .thpro-holo::before,
+    .thpro-holo::after,
+    .thpro-light__bloom,
+    .thpro-light__ray,
+    .thpro-light__dust { animation: none !important; }
+    :root { --thpro-holo-anim: none; }
+}
